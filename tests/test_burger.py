@@ -79,6 +79,11 @@ class TestBurger:
         burger.add_ingredient(ing_mock)
         
         receipt = burger.get_receipt()
-        assert "black bun" in receipt
-        assert "hot sauce" in receipt
-        assert "Price: 250" in receipt  # 2*100 + 50 = 250
+        
+        # ИСПРАВЛЕНИЕ: точная проверка вместо проверки через in
+        expected_receipt = '''(==== black bun ====)
+SAUCE is hot sauce
+(==== black bun ====)
+
+Price: 250'''
+        assert receipt == expected_receipt, f"Ожидался чек:\n{expected_receipt}\nПолучен:\n{receipt}"
